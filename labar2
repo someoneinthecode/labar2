@@ -1,0 +1,141 @@
+using System;
+
+class Address
+{
+    public int Index { get; set; } = 04356;
+    public string Country { get; set; } = "Україна";
+    public string City { get; set; } = "Київ";
+    public string Street { get; set; } = "Героїв Дніпра";
+    public string House { get; set; } = "11А";
+    public string Apartment { get; set; } = "кв.164";
+}
+
+class Converter
+{
+    public double USD { get; set; }
+    public double EUR { get; set; }
+    public double PLN { get; set; }
+
+    public Converter(double usd, double eur, double pln)
+    {
+        USD = usd;
+        EUR = eur;
+        PLN = pln;
+    }
+
+    public double ConvertToUSD(double uah)
+    {
+        return uah / USD;
+    }
+
+    public double ConvertToEUR(double uah)
+    {
+        return uah / EUR;
+    }
+
+    public double ConvertToPLN(double uah)
+    {
+        return uah / PLN;
+    }
+
+    public double ConvertFromUSD(double usd)
+    {
+        return usd * USD;
+    }
+
+    public double ConvertFromEUR(double eur)
+    {
+        return eur * EUR;
+    }
+
+    public double ConvertFromPLN(double pln)
+    {
+        return pln * PLN;
+    }
+}
+
+class Employee
+{
+    public string LastName { get; set; }
+    public string FirstName { get; set; }
+    public string Position { get; set; }
+    public int Experience { get; set; }
+
+    public Employee(string lastName, string firstName)
+    {
+        LastName = lastName;
+        FirstName = firstName;
+    }
+
+    public double CalculateSalary()
+    {
+
+        double baseSalary = 3000; // Базова зарплата
+        double experienceBonus = 100 * Experience; // Бонус за стаж
+        return baseSalary + experienceBonus;
+    }
+
+    public double CalculateTax()
+    {
+
+        double salary = CalculateSalary();
+        double taxRate = 0.18; // Податкова ставка (18%)
+        return salary * taxRate;
+    }
+}
+
+class User
+{
+    public string Login { get; } = "someoneinthecode";
+    public string FirstName { get; set; } = "Нікіта";
+    public string LastName { get; set; } = "Сердюк";
+    public int Age { get; set; } = 18;
+    public DateTime RegistrationDate { get; } = new DateTime(2023, 11, 2);
+
+    public void PrintUserInfo()
+    {
+        Console.WriteLine("Логін: " + Login);
+        Console.WriteLine("Ім'я: " + FirstName);
+        Console.WriteLine("Прізвище: " + LastName);
+        Console.WriteLine("Вік: " + Age);
+        Console.WriteLine("Дата заповнення анкети: " + RegistrationDate.ToString("dd.MM.yy"));
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+
+        Address address = new Address();
+        Console.WriteLine("Поштова адреса:");
+        Console.WriteLine("Індекс: " + address.Index);
+        Console.WriteLine("Країна: " + address.Country);
+        Console.WriteLine("Місто: " + address.City);
+        Console.WriteLine("Вулиця: " + address.Street);
+        Console.WriteLine("Будинок: " + address.House);
+        Console.WriteLine("Квартира: " + address.Apartment);
+
+
+        Converter converter = new Converter(28.5, 33.2, 7.9);
+        double amountUAH = 1000;
+        Console.WriteLine("\nКонвертація гривні в інші валюти:");
+        Console.WriteLine($"{amountUAH} грн = {converter.ConvertToUSD(amountUAH):0.00} USD");
+        Console.WriteLine($"{amountUAH} грн = {converter.ConvertToEUR(amountUAH):0.00} EUR");
+        Console.WriteLine($"{amountUAH} грн = {converter.ConvertToPLN(amountUAH):0.00} PLN");
+
+
+        Employee employee = new Employee("Сердюк", "Нікіта", "Менеджер", 3);
+        Console.WriteLine("\nІнформація про співробітника:");
+        Console.WriteLine("Прізвище: " + employee.LastName);
+        Console.WriteLine("Ім'я: " + employee.FirstName);
+        Console.WriteLine("Посада: " + employee.Position);
+        Console.WriteLine("Заробітна плата: " + employee.CalculateSalary());
+        Console.WriteLine("Податок: " + employee.CalculateTax());
+
+
+        User user = new User();
+        Console.WriteLine("\nІнформація про користувача:");
+        user.PrintUserInfo();
+    }
+}
